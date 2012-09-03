@@ -8,7 +8,10 @@ applications to:
 
 1. Customize code loading
 2. Customize code the initialization and boot process
-3. Allow main and external applications to load generators
+3. Load generators
+4. Load rake tests
+5. Load code for CLI access
+6. Customize the load path
 
 ## Contributing
 
