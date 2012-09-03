@@ -1,24 +1,14 @@
 # Hydrogen
 
-TODO: Write a gem description
+Hydrogen is a framework for building extendable Ruby programs. It
+enables other ruby programs to tie into another for configuration
+purposes. You should use hydrogen if your program needs to be customized
+by external code. Hydrogen allows your main application and external
+applications to:
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'hydrogen'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install hydrogen
-
-## Usage
-
-TODO: Write usage instructions here
+1. Customize code loading
+2. Customize code the initialization and boot process
+3. Allow main and external applications to load generators
 
 ## Contributing
 
