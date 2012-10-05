@@ -6,12 +6,12 @@ purposes. You should use hydrogen if your program needs to be customized
 by external code. Hydrogen allows your main application and external
 applications to:
 
-1. Customize code loading
-2. Customize the initialization and boot process
-3. Load generators
-4. Load rake tests
-5. Load code for CLI access
-6. Customize the load path
+1. Customize sets of file paths
+2. Load generators
+3. Load rake tests
+4. Load code for CLI access
+5. Enable 3rd party code to extend the main application
+6. Enable callbacks to 3rd party code
 
 ## Writing Commands
 
