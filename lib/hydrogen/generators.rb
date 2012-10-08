@@ -6,31 +6,18 @@ module Hydrogen
       @subclasses ||= []
     end
 
-    def self.implicit_namespace
-      "hydrogen"
-    end
-
-    def self.invoke(namespace, args = ARGV, config = {})
-      names = namespace.to_s.split(':')
-      if klass = find_by_namespace(names.pop, names.any? && names.join(':'))
+    def self.invoke(name, args = ARGV, config = {})
+      if klass = find(name)
         klass.start args, config
       else
         raise "Could not find #{namespace}!"
       end
     end
 
-    def self.find_by_namespace(name, base = nil, context = nil)
+    def self.find(name)
       lookups = []
-      lookups << "#{base}:#{name}"    if base
-      lookups << "#{name}:#{context}" if context
-
-      unless base || context
-        unless name.to_s.include?(?:)
-          lookups << "#{name}:#{name}"
-          lookups << "#{implicit_namespace}:#{name}"
-        end
-        lookups << "#{name}"
-      end
+      lookups << name
+      lookups << "#{name}:#{name}"
 
       lookup(lookups)
 
@@ -48,7 +35,7 @@ module Hydrogen
       paths = namespaces_to_paths(namespaces)
 
       paths.each do |raw_path|
-        ["#{implicit_namespace}/generators", "generators"].each do |base|
+        ["generators"].each do |base|
           path = "#{base}/#{raw_path}_generator"
 
           begin
@@ -62,14 +49,9 @@ module Hydrogen
     end
 
     def self.namespaces_to_paths(namespaces)
-      paths = []
-      namespaces.each do |namespace|
-        pieces = namespace.split(":")
-        paths << pieces.dup.push(pieces.last).join("/")
-        paths << pieces.join("/")
-      end
-      paths.uniq!
-      paths
+      namespaces.collect do |namespace|
+        namespace.gsub ":", "/"
+      end.uniq
     end
   end
 end
