@@ -6,6 +6,10 @@ module Hydrogen
       @subclasses ||= []
     end
 
+    def self.default_namespace
+      "hydrogen"
+    end
+
     def self.invoke(name, args = ARGV, config = {})
       if klass = find(name)
         klass.start args, config
@@ -15,10 +19,14 @@ module Hydrogen
     end
 
     def self.find(name)
-      lookup [name]
+      lookups = []
+      lookups << name
+      lookups << "#{default_namespace}:#{name}"
+
+      lookup lookups
 
       subclasses.find do |klass|
-        klass.full_name == name
+        lookups.include? klass.full_name
       end
     end
 
