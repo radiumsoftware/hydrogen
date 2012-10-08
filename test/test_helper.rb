@@ -29,6 +29,7 @@ class MiniTest::Unit::TestCase
   end
 
   def teardown
+    Hydrogen::Component.loaded.clear
     Hydrogen::Component.config.clear
 
     FileUtils.rm_rf sandbox_path if File.directory? sandbox_path

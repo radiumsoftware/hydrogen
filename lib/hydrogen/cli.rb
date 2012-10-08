@@ -11,5 +11,10 @@ module Hydrogen
         end
       end
     end
+
+    desc "generate NAME ARGS", "run the given generator"
+    def generate(name, *args)
+      Hydrogen::Generators.invoke name, args
+    end
   end
 end
