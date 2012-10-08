@@ -10,7 +10,7 @@ module Hydrogen
       if klass = find(name)
         klass.start args, config
       else
-        raise "Could not find #{namespace}!"
+        raise "Could not find #{name}!"
       end
     end
 

@@ -32,4 +32,19 @@ class Hydrogen::GeneratorsTest < MiniTest::Unit::TestCase
     result = invoke "ember:foo"
     assert_equal :invoked, result
   end
+
+  def test_generator_namespace_can_be_nested
+    generator = Class.new Hydrogen::Generator do
+      namespace "ember:test"
+
+      def self.generator_name
+        "model"
+      end
+    end
+
+    generator.expects(:start).returns(:invoked)
+
+    result = invoke "ember:test:model"
+    assert_equal :invoked, result
+  end
 end
