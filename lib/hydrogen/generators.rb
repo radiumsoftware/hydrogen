@@ -21,7 +21,7 @@ module Hydrogen
 
       lookup(lookups)
 
-      generators = Hash[subclasses.map { |klass| [klass.full_generator_name, klass] }]
+      generators = Hash[subclasses.map { |klass| [klass.full_name, klass] }]
 
       lookups.each do |generator|
         klass = generators[generator]

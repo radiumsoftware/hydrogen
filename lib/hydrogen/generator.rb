@@ -22,7 +22,7 @@ module Hydrogen
       end
     end
 
-    def self.full_generator_name
+    def self.full_name
       "#{namespace}:#{generator_name}"
     end
   end

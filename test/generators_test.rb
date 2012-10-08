@@ -11,7 +11,7 @@ class Hydrogen::GeneratorsTest < MiniTest::Unit::TestCase
 
   def test_generator_lookup_against_full_name
     generator = Class.new do
-      def self.full_generator_name
+      def self.full_name
         "foo"
       end
     end
