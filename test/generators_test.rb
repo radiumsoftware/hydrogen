@@ -14,8 +14,6 @@ class Hydrogen::GeneratorsTest < MiniTest::Unit::TestCase
 
     result = Hydrogen::Generators.invoke "foo"
     assert_equal :invoked, result
-  ensure
-    Hydrogen::Generators.subclasses.clear
   end
 
   def test_generator_lookup_works_with_default_namespace
@@ -31,8 +29,6 @@ class Hydrogen::GeneratorsTest < MiniTest::Unit::TestCase
 
     result = Hydrogen::Generators.invoke "foo"
     assert_equal :invoked, result
-  ensure
-    Hydrogen::Generators.subclasses.clear
   end
 
   def test_generator_blows_up_on_missing_generator
