@@ -1,5 +1,5 @@
 module Hydrogen
-  class UnknownGenerator < Error ; end
+  class MissingGenerator < Error ; end
 
   module Generators
     def self.subclasses
@@ -10,7 +10,7 @@ module Hydrogen
       if klass = find(name)
         klass.start args, config
       else
-        raise "Could not find #{name}!"
+        raise MissingGenerator, "Could not find #{name}!"
       end
     end
 

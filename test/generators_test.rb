@@ -17,4 +17,10 @@ class Hydrogen::GeneratorsTest < MiniTest::Unit::TestCase
   ensure
     Hydrogen::Generators.subclasses.clear
   end
+
+  def test_generator_blows_up_on_missing_generator
+    assert_raises Hydrogen::MissingGenerator do
+      Hydrogen::Generators.invoke "this:does:not:exist"
+    end
+  end
 end
