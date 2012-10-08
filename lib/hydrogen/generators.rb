@@ -21,14 +21,9 @@ module Hydrogen
 
       lookup(lookups)
 
-      generators = Hash[subclasses.map { |klass| [klass.full_name, klass] }]
-
-      lookups.each do |generator|
-        klass = generators[generator]
-        return klass if klass
+      subclasses.find do |klass|
+        lookups.include? klass.full_name
       end
-
-      return nil
     end
 
     def self.lookup(namespaces)
