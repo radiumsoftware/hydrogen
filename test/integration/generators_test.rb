@@ -15,7 +15,7 @@ module Hydrogen
 
         cli = Class.new Hydrogen::CLI
 
-        result = cli.start ["generate", "foo", "bar", "baz"]
+        result = cli.start ["g", "foo", "bar", "baz"]
 
         assert_equal :invoked, result
       end
@@ -31,7 +31,7 @@ module Hydrogen
 
         cli = Class.new Hydrogen::CLI
 
-        result = cli.start ["generate", "foo", "bar", "--quick"]
+        result = cli.start ["g", "foo", "bar", "--quick"]
 
         assert_equal :invoked, result
       end
