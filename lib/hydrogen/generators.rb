@@ -15,14 +15,10 @@ module Hydrogen
     end
 
     def self.find(name)
-      lookups = []
-      lookups << name
-      lookups << "#{name}:#{name}"
-
-      lookup(lookups)
+      lookup [name]
 
       subclasses.find do |klass|
-        lookups.include? klass.full_name
+        klass.full_name == name
       end
     end
 
