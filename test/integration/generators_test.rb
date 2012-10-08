@@ -19,6 +19,22 @@ module Hydrogen
 
         assert_equal :invoked, result
       end
+
+      def test_switches_are_passed_to_generator
+        generator = Class.new Hydrogen::Generator do
+          def self.full_name
+            "foo"
+          end
+        end
+
+        generator.expects(:start).with(["bar", "--quick"], {}).returns(:invoked)
+
+        cli = Class.new Hydrogen::CLI
+
+        result = cli.start ["generate", "foo", "bar", "--quick"]
+
+        assert_equal :invoked, result
+      end
     end
   end
 end
