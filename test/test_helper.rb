@@ -2,13 +2,13 @@ require "bundler/setup"
 require "simplecov"
 SimpleCov.start
 
-require "mocha"
-
 require "hydrogen"
 
 require "minitest/unit"
 require "minitest/pride"
 require "minitest/autorun"
+
+require "mocha"
 
 require "fileutils"
 require "pathname"
