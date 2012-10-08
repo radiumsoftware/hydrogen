@@ -1,15 +1,17 @@
-require 'bundler/setup'
-require 'simplecov'
+require "bundler/setup"
+require "simplecov"
 SimpleCov.start
 
-require 'hydrogen'
+require "mocha"
 
-require 'minitest/unit'
-require 'minitest/pride'
-require 'minitest/autorun'
+require "hydrogen"
 
-require 'fileutils'
-require 'pathname'
+require "minitest/unit"
+require "minitest/pride"
+require "minitest/autorun"
+
+require "fileutils"
+require "pathname"
 
 module Hydrogen
   class Component
@@ -33,6 +35,6 @@ class MiniTest::Unit::TestCase
   end
 
   def sandbox_path
-    Pathname.new(File.expand_path('../sandbox', __FILE__))
+    Pathname.new(File.expand_path("../sandbox", __FILE__))
   end
 end

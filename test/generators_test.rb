@@ -1,29 +1,35 @@
-require 'test_helper'
+require "test_helper"
 
 class Hydrogen::GeneratorsTest < MiniTest::Unit::TestCase
   def invoke(*args)
-    stdout, stderr = capture_io do
-      Hydrogen::Generators.invoke *args
-    end
+    Hydrogen::Generators.invoke *args
   end
 
-  class MockGenerator < Hydrogen::Generator
-    desc "say bar"
-    def foo
-      puts "bar"
+  def test_generator_lookup_against_full_name
+    generator = Class.new Hydrogen::Generator do
+      def self.full_generator_name
+        "foo"
+      end
     end
+
+    generator.expects(:start).returns(:invoked)
+
+    result = invoke "foo"
+    assert_equal :invoked, result
   end
 
-  def test_generator_lookup_with_namespace_and_name
-    generator = Class.new MockGenerator do
-      namespace "ember"
+  def test_generator_lookup_against_name_and_namespace
+    generator = Class.new Hydrogen::Generator do
+      namespace :ember
 
       def self.generator_name
         "foo"
       end
     end
 
-    stdout = invoke "ember:foo"
-    assert_includes stdout.to_s, "bar"
+    generator.expects(:start).returns(:invoked)
+
+    result = invoke "ember:foo"
+    assert_equal :invoked, result
   end
 end
