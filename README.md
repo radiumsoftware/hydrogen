@@ -70,6 +70,89 @@ class AutoLoader < Hydrogen::Component
 end
 ```
 
+## Writing Generators
+
+Third party code and include generators. Generators are invoked through
+a `Hydrogen::CLI`. Generators are subclasses of `Hydrogen::Generator`.
+Each generator defines a `full_name` method. This method is used to
+lookup generators via the CLI. The `full_name` is the `namespace` and
+the `name` by default. Override these methods if you like. Here's an
+example.
+
+```ruby
+# Create a generator
+class FooGenerator < Hydrogen::Generator
+  def self.full_name
+    "foo:bar:baz"
+  end
+end
+
+# Now assume you have a simple CLI Ready
+# cli.rb
+class CLI < Hydrogen::CLI ; end
+
+CLI.start
+```
+
+At this point you can run your generator:
+
+```
+$ cli generate foo:bar:baz
+```
+
+It is awkward to define the `full_name` method all the time. You can
+avoid this by following naming conventions. Here are some example:
+
+```
+Foo::Bar::BazGenerator => foo:bar:baz
+Foo::Bar::Baz => foo:bar:baz
+```
+
+You can also set a custom namespace if you like:
+
+```ruby
+# This class can be invoked with "ember:foo"
+
+class FooGenerator < Hydrogen::Generator
+  namespace :ember
+end
+```
+
+You may also redfine the name if you like. This is the class name
+without "Generator" by default.
+
+```ruby
+# This class can be invoked with "ember:adam"
+
+class FooGenerator < Hydrogen::Generator
+  namespace :ember
+
+  def self.name
+    "model"
+  end
+end
+```
+
+If you don't care about any of this stuff then you can simply leave
+things as and they will work more or less as you expect.
+
+Generators may also be invoked via a default namespace. This is used
+when you want your bundled generators to be invokable without a
+namespace but namespaced in code. A real life is example is: `rails g
+model` vs `rails g rspec:setup`. The default namespace is `hydrogen`.
+Here's an example:
+
+```ruby
+module Hydrogen
+  class FooGenerator < Generator
+  end
+end
+```
+
+You can invoke this generator by `cli g foo` or `cli g hydrogen:foo`.
+You can redfine the default namespace by defining
+`Hydrogen::Generators.default_namespace`.
+
 ## Contributing
 
 1. Fork it
