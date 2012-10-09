@@ -5,10 +5,5 @@ module Hydrogen
       str.gsub(/\B[A-Z]/, '_\&').squeeze('_') =~ /_*(.*)/
       return $+.downcase
     end
-
-    def self.camel_case(str)
-      return str if str !~ /_/ && str =~ /[A-Z]+.*/
-      str.split('_').map { |i| i.capitalize }.join
-    end
   end
 end
