@@ -153,6 +153,18 @@ You can invoke this generator by `cli g foo` or `cli g hydrogen:foo`.
 You can redfine the default namespace by defining
 `Hydrogen::Generators.default_namespace`.
 
+### Structuring Generators
+
+Generators are `Thor` classes at the end of the day so they follow some
+of their semantics. Generators are required at invokation time so their
+file names need to follow a convention. Assume `/` in the following
+example is on `$LOAD_PATH`.
+
+```
+/hydrogen/generators/generator_name.rb
+/fully_namespaced/generator/name.rb
+```
+
 ## Contributing
 
 1. Fork it
