@@ -33,12 +33,15 @@ module Hydrogen
     def self.lookup(namespaces)
       paths = namespaces_to_paths(namespaces)
 
-      paths.each do |raw_path|
-        ["generators"].each do |base|
-          path = "#{base}/#{raw_path}_generator"
+      paths.each do |path|
+        tries = [
+          path,
+          "#{path}_generator"
+        ]
 
+        tries.each do |full_path|
           begin
-            require path
+            require full_path
             return
           rescue LoadError
             # nothing
