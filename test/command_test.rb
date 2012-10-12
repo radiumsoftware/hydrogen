@@ -23,12 +23,4 @@ class Hydrogen::CommandTest < MiniTest::Unit::TestCase
 
     assert_equal "This is what I do!", command.description_banner
   end
-
-  def test_commands_have_an_usage
-    command = Class.new Hydrogen::Command do
-      usage "press enter"
-    end
-
-    assert_equal "press enter", command.usage_banner
-  end
 end

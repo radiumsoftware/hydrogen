@@ -4,7 +4,6 @@ class Hydrogen::CLITest < MiniTest::Unit::TestCase
   def test_registered_commands_are_available_in_the_cli
     greeter = Class.new Hydrogen::Command do
       description "Greets people!"
-      usage "greet NAME"
 
       desc "greet NAME", "print a greeting for NAME"
       def greet(name)
