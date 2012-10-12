@@ -83,6 +83,8 @@ module Hydrogen
         if klass.to_s =~ /Command$/
           klass_name = Utils.class_name(klass).match(/(.+)Command$/)[1]
           name = Utils.underscore klass_name
+        elsif name.nil? || name.empty?
+          raise UnknownCommandName
         end
 
         commands << { :class => klass, :name => name }

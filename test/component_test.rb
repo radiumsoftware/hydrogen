@@ -54,6 +54,14 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     assert_equal "compile", command[:name]
   end
 
+  def test_command_raised_an_error_when_name_cannot_be_determined
+    component = Class.new Hydrogen::Component
+
+    assert_raises Hydrogen::UnknownCommandName do
+      component.command Class.new
+    end
+  end
+
   def test_components_can_extend_the_application
     vanilla = Module.new
 

@@ -5,6 +5,7 @@ require "thor"
 module Hydrogen
   class Error < StandardError ; end
   class IncorrectRoot < Error ; end
+  class UnknownCommandName < Error ; end
 end
 
 require "hydrogen/utils"
