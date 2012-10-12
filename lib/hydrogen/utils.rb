@@ -5,5 +5,9 @@ module Hydrogen
       str.gsub(/\B[A-Z]/, '_\&').squeeze('_') =~ /_*(.*)/
       return $+.downcase
     end
+
+    def self.class_name(klass)
+      klass.to_s.split("::").last
+    end
   end
 end

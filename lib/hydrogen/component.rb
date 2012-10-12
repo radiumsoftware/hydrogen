@@ -79,7 +79,12 @@ module Hydrogen
         @instance ||= new
       end
 
-      def command(klass, name)
+      def command(klass, name = nil)
+        if klass.to_s =~ /Command$/
+          klass_name = Utils.class_name(klass).match(/(.+)Command$/)[1]
+          name = Utils.underscore klass_name
+        end
+
         commands << { :class => klass, :name => name }
       end
 

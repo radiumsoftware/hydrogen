@@ -37,6 +37,23 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     assert_equal 2, post_office.commands.size
   end
 
+  def test_command_names_happen_by_convention
+    properly_named_command = Class.new do
+      class << self
+        def to_s
+          "Namespaced::Name::CompileCommand"
+        end
+      end
+    end
+
+    component = Class.new Hydrogen::Component do
+      command properly_named_command
+    end
+
+    command = component.commands.first
+    assert_equal "compile", command[:name]
+  end
+
   def test_components_can_extend_the_application
     vanilla = Module.new
 
