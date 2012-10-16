@@ -6,8 +6,8 @@ module Hydrogen
       @subclasses ||= []
     end
 
-    def self.default_namespace
-      "hydrogen"
+    def self.default_namespaces
+      ["hydrogen"]
     end
 
     def self.invoke(name, args = ARGV, config = {})
@@ -21,7 +21,10 @@ module Hydrogen
     def self.find(name)
       lookups = []
       lookups << name
-      lookups << "#{default_namespace}:#{name}"
+
+      default_namespaces.each do |_namespace|
+        lookups << "#{_namespace}:#{name}"
+      end
 
       lookup lookups
 

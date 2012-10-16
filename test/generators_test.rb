@@ -36,7 +36,7 @@ class Hydrogen::GeneratorsTest < MiniTest::Unit::TestCase
   def test_generator_lookup_works_with_default_namespace
     generator = Class.new do
       def self.full_name
-        "#{Hydrogen::Generators.default_namespace}:foo"
+        "#{Hydrogen::Generators.default_namespaces.first}:foo"
       end
     end
 
