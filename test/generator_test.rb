@@ -56,4 +56,40 @@ class Hydrogen::GeneratorTest < MiniTest::Unit::TestCase
 
     assert_equal "beer:dark", generator.full_name
   end
+
+  def test_source_root_includes_namespace_and_name
+    generator = Class.new Hydrogen::Generator do
+      namespace :foo
+
+      def self.generator_name
+        "bar"
+      end
+    end
+
+    assert_match generator.source_root, %r{foo/bar/templates}
+  end
+
+  def test_source_root_is_based_off_base_root
+    generator = Class.new Hydrogen::Generator do
+      namespace :foo
+
+      def self.generator_name
+        "bar"
+      end
+
+      def self.base_root
+        "/generators"
+      end
+    end
+
+    assert_equal "/generators/foo/bar/templates", generator.source_root
+  end
+
+  def test_source_root_can_be_called_normally
+    generator = Class.new Hydrogen::Generator do
+      source_root :foo
+    end
+
+    assert_equal :foo, generator.source_root
+  end
 end

@@ -29,5 +29,18 @@ module Hydrogen
     def self.full_name
       "#{namespace}:#{generator_name}"
     end
+
+    def self.source_root(path = nil)
+      @_source_root = path if path
+      @_source_root ||= default_source_root
+    end
+
+    def self.default_source_root
+      File.expand_path(File.join(namespace, generator_name, "templates"), base_root)
+    end
+
+    def self.base_root
+      File.dirname(__FILE__)
+    end
   end
 end
