@@ -12,12 +12,14 @@ module Hydrogen
 
     def self.namespace(name=nil)
       return super if name
-      @namespace ||= super.sub(/_generator$/, '').sub(/:generators:/, ':')
+
+      class_namespace = to_s.split('::').first
+      @namespace ||= Utils.underscore(class_namespace) if class_namespace
     end
 
     def self.generator_name
       @generator_name ||= begin
-        if generator = name.to_s.split('::').last
+        if generator = to_s.split('::').last
           generator.sub!(/Generator$/, '')
           Utils.underscore generator
         end

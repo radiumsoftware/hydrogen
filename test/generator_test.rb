@@ -46,4 +46,14 @@ class Hydrogen::GeneratorTest < MiniTest::Unit::TestCase
   def test_generator_name_does_not_include_generator 
     assert_equal "money", MoneyGenerator.generator_name
   end
+
+  def test_generator_name_uses_class_namespace_by_default
+    generator = Class.new Hydrogen::Generator do
+      def self.to_s
+        "Beer::Dark"
+      end
+    end
+
+    assert_equal "beer:dark", generator.full_name
+  end
 end
