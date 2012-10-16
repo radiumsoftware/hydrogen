@@ -3,6 +3,8 @@ require 'thor/group'
 
 module Hydrogen
   class Generator < Thor::Group
+    include Thor::Actions
+
     def self.inherited(base)
       super
       Hydrogen::Generators.subclasses << base
