@@ -6,11 +6,11 @@ require 'hydrogen/version'
 Gem::Specification.new do |gem|
   gem.name          = "hydrogen"
   gem.version       = Hydrogen::VERSION
-  gem.authors       = ["twinturbo"]
+  gem.authors       = ["Adam Hawkins"]
   gem.email         = ["me@broadcastingadam.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Framework for building extendable Ruby application}
+  gem.summary       = %q{}
+  gem.homepage      = "https://github.com/radiumsoftware/hydrogen"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
