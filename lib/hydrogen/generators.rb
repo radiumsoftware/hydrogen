@@ -7,7 +7,7 @@ module Hydrogen
     end
 
     def self.default_namespaces
-      ["hydrogen"]
+      @default_namespaces ||= ["hydrogen"]
     end
 
     def self.invoke(name, args = ARGV, config = {})

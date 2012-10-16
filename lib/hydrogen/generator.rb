@@ -18,12 +18,7 @@ module Hydrogen
     end
 
     def self.generator_name
-      @generator_name ||= begin
-        if generator = to_s.split('::').last
-          generator.sub!(/Generator$/, '')
-          Utils.underscore generator
-        end
-      end
+      @generator_name ||= generator_class_name
     end
 
     def self.full_name
@@ -36,11 +31,17 @@ module Hydrogen
     end
 
     def self.default_source_root
-      File.expand_path(File.join(namespace, generator_name, "templates"), base_root)
+      File.expand_path(File.join(namespace, generator_class_name, "templates"), base_root)
     end
 
     def self.base_root
       File.dirname(__FILE__)
+    end
+
+    def self.generator_class_name
+      generator = to_s.split('::').last
+      generator.sub!(/Generator$/, '')
+      Utils.underscore generator
     end
   end
 end

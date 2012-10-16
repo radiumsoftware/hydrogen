@@ -61,8 +61,20 @@ class Hydrogen::GeneratorTest < MiniTest::Unit::TestCase
     generator = Class.new Hydrogen::Generator do
       namespace :foo
 
-      def self.generator_name
-        "bar"
+      def self.to_s
+        "Bar"
+      end
+    end
+
+    assert_match generator.source_root, %r{foo/bar/templates}
+  end
+
+  def test_source_root_does_not_include_generator
+    generator = Class.new Hydrogen::Generator do
+      namespace :foo
+
+      def self.to_s
+        "BarGenerator"
       end
     end
 
@@ -73,8 +85,8 @@ class Hydrogen::GeneratorTest < MiniTest::Unit::TestCase
     generator = Class.new Hydrogen::Generator do
       namespace :foo
 
-      def self.generator_name
-        "bar"
+      def self.to_s
+        "Bar"
       end
 
       def self.base_root
