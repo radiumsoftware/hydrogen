@@ -30,7 +30,7 @@ module Hydrogen
       end
 
       def expanded
-        map do |entry|
+        results = map do |entry|
           base = File.expand_path entry.path, @root
 
           if glob = entry.options[:glob]
@@ -39,6 +39,8 @@ module Hydrogen
             base
           end
         end.flatten.uniq
+
+        results.map { |f| Pathname.new f }
       end
       alias to_a expanded
 

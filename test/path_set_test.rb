@@ -32,7 +32,7 @@ class Hydrogen::PathSetTest < MiniTest::Unit::TestCase
     directories = set[:images].directories
 
     assert_equal 1, directories.length
-    assert_includes directories, sandbox_path.join("images/sprites").to_s
+    assert_includes directories, sandbox_path.join("images/sprites")
   end
 
   def test_paths_can_return_files
@@ -45,7 +45,7 @@ class Hydrogen::PathSetTest < MiniTest::Unit::TestCase
     files = set[:images].files
 
     assert_equal 1, files.length
-    assert_includes files, sandbox_path.join("images/logo.png").to_s
+    assert_includes files, sandbox_path.join("images/logo.png")
   end
 
   def test_paths_used_expanded_for_array

@@ -101,9 +101,9 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
       paths[:foo].add "bar"
     end
 
-    base_path = File.expand_path("../../", __FILE__)
+    base_path = Pathname.new(File.expand_path("../../", __FILE__))
 
-    assert_equal ["#{base_path}/bar"], component.paths[:foo].expanded
+    assert_equal [base_path.join("bar")], component.paths[:foo].expanded
   end
 
   def test_component_root
