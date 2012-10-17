@@ -14,11 +14,9 @@ require "fileutils"
 require "pathname"
 
 module Hydrogen
-  class Component
-    class Configuration
-      def clear
-        @@options.clear
-      end
+  class Configuration
+    def clear
+      @@options.clear
     end
   end
 end
