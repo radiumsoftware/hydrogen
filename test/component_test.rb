@@ -23,12 +23,10 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
   def test_components_can_register_commands
     receive_mail = Class.new Hydrogen::Command do
       description "Receives incoming mail"
-      usage "foo"
     end
 
     deliver_mail = Class.new Hydrogen::Command do
       description "Delivers mails"
-      usage "foo"
     end
 
     post_office = Class.new Hydrogen::Component do
