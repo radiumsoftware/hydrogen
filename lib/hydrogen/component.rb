@@ -65,7 +65,11 @@ module Hydrogen
     end
 
     def paths
-      @paths ||= PathSet.new find_root_with_flag("lib")
+      @paths ||= PathSet.new root
+    end
+
+    def root
+      @root ||= find_root_with_flag("lib")
     end
 
     def callbacks

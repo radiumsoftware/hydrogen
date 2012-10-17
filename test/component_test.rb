@@ -106,6 +106,15 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     assert_equal ["#{base_path}/bar"], component.paths[:foo].expanded
   end
 
+  def test_component_root
+    component = Class.new Hydrogen::Component
+
+    root_path = File.expand_path("../../", __FILE__)
+
+    assert_kind_of Pathname, component.new.root
+    assert_equal root_path, component.new.root.to_s
+  end
+
   def test_components_can_be_configured
     component = Class.new Hydrogen::Component
 
