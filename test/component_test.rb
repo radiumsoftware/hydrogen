@@ -105,4 +105,14 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
 
     assert_includes stdout, "Callback called!"
   end
+
+  def test_components_can_add_paths
+    component = Class.new Hydrogen::Component do
+      paths[:foo].add "bar"
+    end
+
+    base_path = File.expand_path("../../", __FILE__)
+
+    assert_equal ["#{base_path}/bar"], component.paths[:foo].expanded
+  end
 end
