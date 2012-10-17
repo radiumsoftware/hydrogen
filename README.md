@@ -23,34 +23,40 @@ Here's an example:
 
 ```ruby
 # First: write your command
-class HelloWorld < Hydrogen::Command
-  # thor stuff
+class GreetCommand < Hydrogen::Command
+  # This is a general description used by thor
+  # when the main help command is run
+  description "Says hello"
+
+  desc "hello MSG", "print the hello message"
   def hello(msg)
     puts msg
   end
 end
 
 # Second: connect it with a component
-# greeter.rb
-class Greeter < Hydrogen::Component
-  command HelloWorld, :hello, description, help
+# greeter_component.rb
+class GreeterComponent < Hydrogen::Component
+  # classes ending in Command will use the snake case 
+  # version of the first part for the command name.
+  command GreetCommand
 end
 
 # Third: setup the CLI
 # cli.rb
 require 'hydrogen'
-require 'gretter' # loads the greeter component
+require 'greeter' # loads the greeter component
 
 class MyCLI < Hydrogen::CLI
 
 end
 
-MyCLI.run
+MyCLI.start
 ```
 
 ```
 # Finally in the shell
-$ ruby ./cli hello Adam
+$ ruby ./cli greet hello Adam
 ```
 
 Now any number of external or internal libraries can augment your main
@@ -104,8 +110,8 @@ It is awkward to define the `full_name` method all the time. You can
 avoid this by following naming conventions. Here are some example:
 
 ```
-Foo::Bar::BazGenerator => foo:bar:baz
-Foo::Bar::Baz => foo:bar:baz
+Foo::Bar::BazGenerator => foo:baz
+Foo::Bar::Baz => foo:baz
 ```
 
 You can also set a custom namespace if you like:
@@ -155,15 +161,30 @@ You can redfine the default namespace by defining
 
 ### Structuring Generators
 
-Generators are `Thor` classes at the end of the day so they follow some
-of their semantics. Generators are required at invokation time so their
+Generators are required at invokation time so their
 file names need to follow a convention. Assume `/` in the following
 example is on `$LOAD_PATH`.
 
 ```
-/hydrogen/generators/generator_name.rb
-/fully_namespaced/generator/name.rb
+/hydrogen/generators/name_generator.rb
+/hydrogen/generators/name.erb
+/namespace/generator/name.rb
+/namespace/generator/name_generator.rb
 ```
+
+### Generator Templates
+
+The `source_root` for generators is also prefined for you. Its also
+based on the class name. Say you have this generator:
+
+```ruby
+# /ember/model_generator.rb
+class Ember::ModelGenerator < Hydrogen::Generator
+
+end
+```
+
+Your templates directory would be `/ember/model/templates`
 
 ## Contributing
 
