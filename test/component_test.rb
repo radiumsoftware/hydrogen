@@ -123,5 +123,11 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     end
 
     assert_equal :bar, component.config.foo
+
+    component.new.configure do
+      config.foo = :baz
+    end
+
+    assert_equal :baz, component.config.foo
   end
 end

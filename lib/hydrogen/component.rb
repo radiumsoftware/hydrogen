@@ -19,7 +19,7 @@ module Hydrogen
 
       def inherited(base)
         loaded << base
-        base.called_from = File.dirname(caller.first.sub(%r{:\d+.*}, ''))
+        base.called_from = File.dirname(caller[1].sub(%r{:\d+.*}, ''))
       end
 
       def config
@@ -74,6 +74,10 @@ module Hydrogen
 
     def callbacks
       config.callbacks
+    end
+
+    def configure(&block)
+      self.class.configure &block
     end
 
     def run_callbacks(event)
