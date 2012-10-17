@@ -45,10 +45,6 @@ module Hydrogen
         config.commands
       end
 
-      def app
-        instance.app
-      end
-
       def paths
         instance.paths
       end
