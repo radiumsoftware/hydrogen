@@ -64,14 +64,6 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     end
   end
 
-  def test_components_can_extend_the_application
-    vanilla = Module.new
-
-    latte = Class.new Hydrogen::Component do
-      app.extend vanilla
-    end
-  end
-
   def test_components_can_configure_paths
     asset_component = Class.new Hydrogen::Component do
       paths[:images].add "foo"

@@ -31,28 +31,6 @@ module Hydrogen
       end
     end
 
-    class AppProxy
-      def initialize
-        @extensions, @includes = [], []
-      end
-
-      def extend(klass)
-        @extensions << klass
-      end
-
-      def include(klass)
-        @includes << klass
-      end
-
-      def extensions
-        @extensions
-      end
-
-      def includes
-        @includes
-      end
-    end
-
     class << self
       def loaded
         @loaded ||= []
@@ -115,10 +93,6 @@ module Hydrogen
 
     def config
       @config ||= Configuration.new
-    end
-
-    def app
-      @app ||= AppProxy.new
     end
 
     def paths
