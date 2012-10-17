@@ -21,6 +21,6 @@ class Hydrogen::CommandTest < MiniTest::Unit::TestCase
       description "This is what I do!"
     end
 
-    assert_equal "This is what I do!", command.description_banner
+    assert_equal "This is what I do!", command.description
   end
 end
