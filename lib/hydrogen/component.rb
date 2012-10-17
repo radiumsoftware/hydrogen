@@ -1,6 +1,10 @@
 module Hydrogen
   class Component
     class << self
+      def configure(&block)
+        class_eval(&block)
+      end
+
       def loaded
         @loaded ||= []
       end

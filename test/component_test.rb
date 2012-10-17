@@ -107,4 +107,14 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
 
     assert_equal ["#{base_path}/bar"], component.paths[:foo].expanded
   end
+
+  def test_components_can_be_configured
+    component = Class.new Hydrogen::Component
+
+    component.configure do 
+      config.foo = :bar
+    end
+
+    assert_equal :bar, component.config.foo
+  end
 end
