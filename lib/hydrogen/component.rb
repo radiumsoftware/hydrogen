@@ -80,12 +80,12 @@ module Hydrogen
       self.class.configure &block
     end
 
-    def run_callbacks(event)
+    def run_callbacks(event, *args)
       key = event.to_sym
       return unless callbacks[key]
 
       callbacks[key].each do |callback|
-        callback.call self
+        callback.call *args
       end
     end
 

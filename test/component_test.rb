@@ -96,6 +96,20 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     assert_includes stdout, "Callback called!"
   end
 
+  def test_callbacks_pass_args_in
+    proxy = mock
+
+    component = Class.new Hydrogen::Component do
+      callback :foo do |object|
+        object.foo
+      end
+    end
+
+    proxy.expects(:foo)
+
+    component.instance.run_callbacks :foo, proxy
+  end
+
   def test_component_callbacks_are_not_shared
     component1 = Class.new Hydrogen::Component do
       callback :foo do
