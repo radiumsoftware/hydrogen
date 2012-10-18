@@ -55,7 +55,7 @@ module Hydrogen
 
       def callback(name, *args, &block)
         key = name.to_sym
-        callbacks[name] ||= CallbackSet.new
+        callbacks[name] ||= CallbackSet.new [], :via => self
         callbacks[name].add *args, &block
       end
     end

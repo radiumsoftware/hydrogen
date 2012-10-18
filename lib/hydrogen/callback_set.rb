@@ -33,14 +33,15 @@ module Hydrogen
       end
     end
 
-    def initialize(callbacks = [])
+    def initialize(callbacks = [], default_options = {})
       @set = Collection.new(callbacks)
+      @default_options = default_options
     end
 
     def add(*args, &block)
       options = Utils.extract_options! args
       name = args.shift
-      @set << Callback.new(name, options, &block)
+      @set << Callback.new(name, options.merge(@default_options), &block)
     end
 
     def invoke(*args)
@@ -57,5 +58,9 @@ module Hydrogen
       self.class.new matches
     end
     alias select filter
+
+    def to_a
+      @set.to_a
+    end
   end
 end

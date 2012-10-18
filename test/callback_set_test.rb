@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class CallbackSetTest < MiniTest::Unit::TestCase
+  def test_callbacks_can_specify_options_for_all_callbacks
+    set = Hydrogen::CallbackSet.new [], :type => :test
+    set.add { }
+    assert_equal :test, set.to_a.first.options[:type]
+  end
+
   def test_callbacks_can_specify_after
     results = []
 
