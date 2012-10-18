@@ -27,10 +27,6 @@ module Hydrogen
       def after
         options[:after]
       end
-
-      def ordered?
-        before || after
-      end
     end
 
     def initialize(callbacks = [], default_options = {})
