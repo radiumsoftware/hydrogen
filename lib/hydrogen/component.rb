@@ -73,7 +73,7 @@ module Hydrogen
     end
 
     def callbacks
-      config.callbacks
+      @callbacks ||= {}
     end
 
     def configure(&block)
@@ -97,7 +97,7 @@ module Hydrogen
       end
 
       root = File.exist?("#{root_path}/#{flag}") ? root_path : default
-      raise CouldNotFindRoot, "Could not find root path for #{self}" unless root
+      raise CouldNotFindRoot, "Could not find root path for #{self}. Started at: #{self.class.called_from}" unless root
 
       RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ?
         Pathname.new(root).expand_path : Pathname.new(root).realpath

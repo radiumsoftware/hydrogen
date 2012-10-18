@@ -90,10 +90,26 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     end
 
     stdout, stdio = capture_io do
-      callback_component.new.run_callbacks :foo
+      callback_component.instance.run_callbacks :foo
     end
 
     assert_includes stdout, "Callback called!"
+  end
+
+  def test_component_callbacks_are_not_shared
+    component1 = Class.new Hydrogen::Component do
+      callback :foo do
+
+      end
+    end
+
+    component2 = Class.new Hydrogen::Component do
+      callback :bar do
+
+      end
+    end
+
+    refute_equal component2.callbacks, component1.callbacks
   end
 
   def test_components_can_add_paths
