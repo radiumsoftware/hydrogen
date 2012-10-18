@@ -10,6 +10,7 @@ end
 
 require "hydrogen/utils"
 require "hydrogen/path_set"
+require "hydrogen/path_set_proxy"
 require "hydrogen/configuration"
 require "hydrogen/component"
 require "hydrogen/command"
