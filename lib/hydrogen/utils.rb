@@ -10,6 +10,14 @@ module Hydrogen
       def class_name(klass)
         klass.to_s.split("::").last
       end
+
+      def extract_options!(args)
+        if args.last.is_a? Hash
+          args.pop
+        else
+          {}
+        end
+      end
     end
   end
 end

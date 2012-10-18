@@ -10,6 +10,7 @@ module Hydrogen
 end
 
 require "hydrogen/utils"
+require "hydrogen/callback_set"
 require "hydrogen/path_set"
 require "hydrogen/path_set_proxy"
 require "hydrogen/configuration"
