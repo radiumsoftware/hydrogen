@@ -53,10 +53,10 @@ module Hydrogen
         instance.callbacks
       end
 
-      def callback(name, &block)
+      def callback(name, *args, &block)
         key = name.to_sym
-        callbacks[name] ||= []
-        callbacks[name].push block
+        callbacks[name] ||= CallbackSet.new
+        callbacks[name].add *args, &block
       end
     end
 
@@ -78,15 +78,6 @@ module Hydrogen
 
     def configure(&block)
       self.class.configure &block
-    end
-
-    def run_callbacks(event, *args)
-      key = event.to_sym
-      return unless callbacks[key]
-
-      callbacks[key].each do |callback|
-        callback.call *args
-      end
     end
 
     private
