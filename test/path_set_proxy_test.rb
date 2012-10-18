@@ -23,7 +23,7 @@ class PathSetProxyTest < MiniTest::Unit::TestCase
 
     proxy = Hydrogen::PathSetProxy.new [my_paths, vendor_paths]
 
-    assert_includes proxy[:js].expanded, my_paths[:js].expanded
-    assert_includes proxy[:js].expanded, vendor_paths[:js].expanded
+    assert_includes proxy[:js].expanded, my_paths[:js].expanded.first
+    assert_includes proxy[:js].expanded, vendor_paths[:js].expanded.first
   end
 end

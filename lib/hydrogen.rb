@@ -6,6 +6,7 @@ module Hydrogen
   class Error < StandardError ; end
   class IncorrectRoot < Error ; end
   class UnknownCommandName < Error ; end
+  class CouldNotFindRoot < Error ; end
 end
 
 require "hydrogen/utils"

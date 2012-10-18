@@ -9,7 +9,7 @@ module Hydrogen
     end
 
     def expanded
-      self.class.new(forward(:expanded))
+      forward(:expanded).flatten
     end
     alias to_a expanded
 
