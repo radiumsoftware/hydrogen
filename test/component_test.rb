@@ -92,22 +92,6 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     assert_kind_of Hydrogen::CallbackSet, component.callbacks[:foo]
   end
 
-  def test_component_callbacks_are_not_shared
-    component1 = Class.new Hydrogen::Component do
-      callback :foo do
-
-      end
-    end
-
-    component2 = Class.new Hydrogen::Component do
-      callback :bar do
-
-      end
-    end
-
-    refute_equal component2.callbacks, component1.callbacks
-  end
-
   def test_components_can_add_paths
     component = Class.new Hydrogen::Component do
       paths[:foo].add "bar"

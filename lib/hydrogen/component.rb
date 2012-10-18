@@ -50,7 +50,7 @@ module Hydrogen
       end
 
       def callbacks
-        instance.callbacks
+        config.callbacks
       end
 
       def callback(name, *args, &block)
@@ -70,10 +70,6 @@ module Hydrogen
 
     def root
       @root ||= find_root_with_flag("lib")
-    end
-
-    def callbacks
-      @callbacks ||= {}
     end
 
     def configure(&block)
