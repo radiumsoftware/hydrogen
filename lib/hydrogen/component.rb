@@ -81,7 +81,10 @@ module Hydrogen
     end
 
     def run_callbacks(event)
-      callbacks[event.to_sym].each do |callback|
+      key = event.to_sym
+      return unless callbacks[key]
+
+      callbacks[key].each do |callback|
         callback.call self
       end
     end

@@ -112,6 +112,11 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     refute_equal component2.callbacks, component1.callbacks
   end
 
+  def test_running_calbacks_does_not_raise_error_when_none
+    component = Class.new Hydrogen::Component
+    component.instance.run_callbacks :foo
+  end
+
   def test_components_can_add_paths
     component = Class.new Hydrogen::Component do
       paths[:foo].add "bar"
