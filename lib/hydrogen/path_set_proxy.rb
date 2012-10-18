@@ -9,7 +9,7 @@ module Hydrogen
     end
 
     def expanded
-      forward(:expanded).flatten
+      forward(:expanded).flatten.uniq
     end
     alias to_a expanded
 
