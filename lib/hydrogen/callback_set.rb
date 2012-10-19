@@ -35,6 +35,8 @@ module Hydrogen
     end
 
     def add(*args, &block)
+      raise "Block required" unless block
+
       options = Utils.extract_options! args
       name = args.shift
       @set << Callback.new(name, options.merge(@default_options), &block)

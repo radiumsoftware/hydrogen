@@ -141,4 +141,11 @@ class CallbackSetTest < MiniTest::Unit::TestCase
     set.clear
     assert_empty set
   end
+
+  def test_raise_an_error_when_block_given
+    set = Hydrogen::CallbackSet.new
+    assert_raises RuntimeError do
+      set.add "foo"
+    end
+  end
 end
