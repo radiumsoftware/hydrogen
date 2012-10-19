@@ -128,4 +128,17 @@ class CallbackSetTest < MiniTest::Unit::TestCase
 
     assert_equal %w(a c), results
   end
+
+  def test_array_like_interface
+    set = Hydrogen::CallbackSet.new
+    assert_equal 0, set.size
+
+    set.add "foo" do 
+
+    end
+    assert_equal 1, set.size
+
+    set.clear
+    assert_empty set
+  end
 end

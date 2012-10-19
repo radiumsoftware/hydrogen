@@ -72,6 +72,10 @@ module Hydrogen
       @root ||= find_root_with_flag("lib")
     end
 
+    def callbacks
+      config.callbacks
+    end
+
     def configure(&block)
       self.class.configure &block
     end

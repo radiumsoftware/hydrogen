@@ -58,5 +58,18 @@ module Hydrogen
     def to_a
       @set.to_a
     end
+
+    def clear
+      @set.clear
+    end
+
+    def size
+      @set.size
+    end
+    alias length size
+
+    def empty?
+      @set.empty?
+    end
   end
 end
