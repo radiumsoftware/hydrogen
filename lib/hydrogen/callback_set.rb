@@ -43,16 +43,17 @@ module Hydrogen
     end
 
     def invoke(*args)
-      @set.tsort.each do |callback|
-        callback.invoke *args
+      if block_given?
+        filter { |cbk| yield cbk }.invoke *args
+      else
+        @set.tsort.each do |callback|
+          callback.invoke *args
+        end
       end
     end
 
     def filter
-      matches = @set.select do |callback|
-        yield callback
-      end
-
+      matches = @set.select { |cbk| yield cbk }
       self.class.new matches
     end
     alias select filter

@@ -83,6 +83,25 @@ class CallbackSetTest < MiniTest::Unit::TestCase
     assert_equal %w(b a c), results
   end
 
+  def test_invoke_with_block_filters_callbacks
+    results = []
+    set = Hydrogen::CallbackSet.new
+
+    set.add :foo => :bar do
+      results << "a"
+    end
+
+    set.add do
+      results << "b"
+    end
+
+    set.invoke do |cbk|
+      cbk.options[:foo] == :bar
+    end
+
+    assert_equal ["a"], results
+  end
+
   def test_callbacks_without_order_are_invoked_in_declared_order
     results = []
 
