@@ -92,6 +92,19 @@ class Hydrogen::ComponentTest < MiniTest::Unit::TestCase
     assert_kind_of Hydrogen::CallbackSet, component.callbacks[:foo]
   end
 
+  def test_components_can_pass_options_for_callbacks
+    component = Class.new Hydrogen::Component do
+      callback :foo, :bar => :baz do
+        puts "Callback called!"
+      end
+    end
+
+    assert_kind_of Hydrogen::CallbackSet, component.callbacks[:foo]
+    callback = component.callbacks[:foo].to_a.first
+
+    assert_equal :baz, callback.options[:bar]
+  end
+
   def test_components_can_add_paths
     component = Class.new Hydrogen::Component do
       paths[:foo].add "bar"

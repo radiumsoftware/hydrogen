@@ -54,8 +54,6 @@ module Hydrogen
       end
 
       def callback(set, *args, &block)
-        options = Utils.extract_options! args
-
         callbacks[set] ||= CallbackSet.new
         callbacks[set].add *args, &block
       end
