@@ -124,6 +124,28 @@ class CallbackSetTest < MiniTest::Unit::TestCase
     assert_equal %w(a b c), results
   end
 
+  def test_no_names_and_cyclic_conditions
+    results = []
+
+    set = Hydrogen::CallbackSet.new
+
+    set.add do
+      results << "a"
+    end
+
+    set.add do
+      results << "b"
+    end
+
+    set.add do
+      results << "c"
+    end
+
+    set.invoke
+
+    assert_equal %w(a b c), results
+  end
+
   def test_filtering_callbacks_returns_a_new_set
     results = []
 

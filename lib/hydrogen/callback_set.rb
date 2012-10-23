@@ -3,8 +3,17 @@ module Hydrogen
     class Collection < Array
       include TSort
 
+      # group dependencies based on name. Names are optional so
+      # we have to guard agains that case because it creates
+      # circular dependencies
       def tsort_each_child(callback, &block)
-        select { |c| c.before == callback.name || c.name == callback.after }.each(&block)
+        select do |c| 
+          if !callback.name
+            false
+          else
+            c.before == callback.name || c.name == callback.after
+          end
+        end.each(&block)
       end
       alias :tsort_each_node :each
     end
