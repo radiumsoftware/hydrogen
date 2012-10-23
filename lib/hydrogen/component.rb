@@ -53,10 +53,12 @@ module Hydrogen
         config.callbacks
       end
 
-      def callback(name, *args, &block)
-        key = name.to_sym
-        callbacks[name] ||= CallbackSet.new [], :via => self
-        callbacks[name].add *args, &block
+      def callback(*args, &block)
+        options = Utils.extract_options! args
+        name = args.shift
+
+        callbacks[name] ||= CallbackSet.new
+        callbacks[name].add name, options, &block
       end
     end
 
