@@ -7,7 +7,6 @@ require "hydrogen"
 require "debugger"
 
 require "minitest/unit"
-require "minitest/pride"
 require "minitest/autorun"
 
 require "mocha"
