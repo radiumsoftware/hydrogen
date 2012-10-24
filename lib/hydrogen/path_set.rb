@@ -18,7 +18,15 @@ module Hydrogen
     end
 
     class Path < ::Array
-      class Entry < Struct.new(:path, :options) ; end
+      class Entry < Struct.new(:path, :options)
+        def glob
+          if options[:glob].respond_to? :call
+            options[:glob].call
+          elsif options[:glob]
+            options[:glob]
+          end
+        end
+      end
 
       def initialize(root)
         @root = root
@@ -33,8 +41,8 @@ module Hydrogen
         results = map do |entry|
           base = File.expand_path entry.path, @root
 
-          if glob = entry.options[:glob]
-            Dir["#{base}/#{glob}"]
+          if entry.glob
+            Dir["#{base}/#{entry.glob}"]
           else
             base
           end

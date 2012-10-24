@@ -35,6 +35,42 @@ class Hydrogen::PathSetTest < MiniTest::Unit::TestCase
     assert_includes directories, sandbox_path.join("images/sprites")
   end
 
+  def test_globing_to_a_file_expands_to_the_file
+    create_file "config/test.rb"
+
+    set = Hydrogen::PathSet.new sandbox_path
+    set[:environment].add "config", :glob => "test.rb"
+
+    expanded = set[:environment].expanded
+
+    assert_equal 1, expanded.length
+    assert_equal expanded.first, sandbox_path.join("config/test.rb")
+  end
+
+  def test_addinga_file_expands_to_the_file
+    create_file "config/test.rb"
+
+    set = Hydrogen::PathSet.new sandbox_path
+    set[:environment].add "config/test.rb"
+
+    expanded = set[:environment].expanded
+
+    assert_equal 1, expanded.length
+    assert_equal expanded.first, sandbox_path.join("config/test.rb")
+  end
+
+  def test_glob_can_be_respond_to_call
+    create_file "config/test.rb"
+
+    set = Hydrogen::PathSet.new sandbox_path
+    set[:environment].add "config", :glob => proc { "test.rb" }
+
+    expanded = set[:environment].expanded
+
+    assert_equal 1, expanded.length
+    assert_equal expanded.first, sandbox_path.join("config/test.rb")
+  end
+
   def test_paths_can_return_files
     create_file "images/logo.png"
     create_directory "images/sprites"
